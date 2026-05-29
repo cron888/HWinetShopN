@@ -70,6 +70,19 @@ public class App {
         // Поиск товара по имени в пустой корзине
         System.out.println("Корзина содержит Товар1 в пустой корзине: " + basket.containsProduct("Товар1"));
 
+        SearchEngine searchEngine = new SearchEngine(10);
+        searchEngine.add(product1);
+        searchEngine.add(product2);
+        searchEngine.add(product3);
+
+        Article article1 = new Article("Статья про Товар1", "Подробное описание и обзор Товар1");
+        Article article2 = new Article("Скидки на Товар2", "Акция на Товар2 до конца месяца");
+        Article article3 = new Article("Новинка", "Представляем новинку — Товар3 по фиксированной цене");
+
+        searchEngine.add(article1);
+        searchEngine.add(article2);
+        searchEngine.add(article3);
+
         // Тестирование поиска
         System.out.println("\n--- Поиск по запросу 'Товар1' ---");
         System.out.println(Arrays.toString(searchEngine.search("Товар1")));
