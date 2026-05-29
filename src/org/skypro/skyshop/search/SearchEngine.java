@@ -1,5 +1,6 @@
 package org.skypro.skyshop.search;
 
+import org.skypro.skyshop.BestResultNotFound;
 import org.skypro.skyshop.Searchable;
 
 public class SearchEngine {
@@ -30,5 +31,40 @@ public class SearchEngine {
             }
         }
         return results;
+    }
+
+    public Searchable findBestMatch(String search) throws BestResultNotFound {
+        if (itemCount == 0) {
+            throw new BestResultNotFound("Не найдено подходящего результата для запроса: '" + search + "'");
+        }
+
+        Searchable bestMatch = null;
+        int maxCount = -1;
+
+        for (int i = 0; i < itemCount; i++) {
+            Searchable item = searchableItems[i];
+            int count = countOccurrences(item.getSearchTerm().toLowerCase(), search.toLowerCase());
+            if (count > maxCount) {
+                maxCount = count;
+                bestMatch = item;
+            }
+        }
+
+        if (bestMatch == null || maxCount == 0) {
+            throw new BestResultNotFound("Не найдено подходящего результата для запроса: '" + search + "'");
+        }
+
+        return bestMatch;
+    }
+
+    private int countOccurrences(String str, String substring) {
+        if (substring.isEmpty()) return 0;
+        int count = 0;
+        int index = 0;
+        while ((index = str.indexOf(substring, index)) != -1) {
+            count++;
+            index += substring.length();
+        }
+        return count;
     }
 }
