@@ -43,7 +43,7 @@ public class App {
 
         // Добавление продукта в заполненную корзину
         for (int i = 0; i < 5; i++) {
-            basket.addProduct(new Product("ДопТовар" + i, 50));
+            basket.addProduct(new SimpleProduct("ДопТовар" + i, 50));
         }
 
         // Печать содержимого корзины с несколькими товарами
